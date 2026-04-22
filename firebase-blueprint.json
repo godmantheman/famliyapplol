@@ -1,0 +1,93 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Family member profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["아빠", "엄마", "할머니", "할아버지", "아들", "딸"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "email"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Family announcements and board posts",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "isNotice": { "type": "boolean" }
+      },
+      "required": ["title", "content", "authorId", "createdAt"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Real-time chat message",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "senderPhoto": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["text", "senderId", "createdAt"]
+    },
+    "SharedFile": {
+      "title": "SharedFile",
+      "description": "Metadata for shared files/links",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "type": { "type": "string" },
+        "sharedBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "url", "sharedBy", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "User specific notifications",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string" },
+        "message": { "type": "string" },
+        "isRead": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "message", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": "User",
+      "description": "Collection of family members"
+    },
+    "announcements": {
+      "schema": "Announcement",
+      "description": "Family board and notices"
+    },
+    "messages": {
+      "schema": "Message",
+      "description": "Real-time group chat messages"
+    },
+    "files": {
+      "schema": "SharedFile",
+      "description": "Shared links and document info"
+    },
+    "notifications": {
+      "schema": "Notification",
+      "description": "User notifications"
+    }
+  }
+}
